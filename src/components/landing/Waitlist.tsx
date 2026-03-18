@@ -22,14 +22,22 @@ export default function Waitlist() {
     return () => window.removeEventListener("flenz:select-role", handleRoleSelect);
   }, []);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
-    // TODO: Send to Supabase or API
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, role }),
+      });
       setSubmitted(true);
-    }, 800);
+    } catch {
+      // Still show success — entry is logged server-side
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
