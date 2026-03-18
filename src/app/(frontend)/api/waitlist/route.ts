@@ -1,9 +1,6 @@
 import { Redis } from "@upstash/redis";
 import { NextResponse } from "next/server";
 
-import { sendEmail } from "@/lib/email/send";
-import { waitlistConfirmationEmail } from "@/lib/email/templates";
-
 function getRedis() {
   const url = process.env.KV_REST_API_URL;
   const token = process.env.KV_REST_API_TOKEN;
@@ -27,13 +24,6 @@ export async function POST(request: Request) {
     } else {
       console.log("[WAITLIST]", JSON.stringify(entry));
     }
-
-    // Send confirmation email (non-blocking — don't fail the request if email fails)
-    sendEmail({
-      to: email,
-      subject: "You're on the Flenz waitlist!",
-      html: waitlistConfirmationEmail(role),
-    }).catch((err) => console.error("[email] Waitlist confirmation failed:", err));
 
     return NextResponse.json({ success: true });
   } catch {
