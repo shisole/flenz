@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0a0a0f] text-gray-100 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-400 text-white font-semibold py-3 px-6 rounded-xl transition-colors;
+  }
+  .btn-secondary {
+    @apply bg-secondary-500 hover:bg-secondary-600 text-white font-semibold py-3 px-6 rounded-xl transition-colors;
+  }
+  .btn-outline {
+    @apply border-2 border-white/20 text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-xl transition-colors;
+  }
+  .card {
+    @apply bg-white/5 border border-white/10 rounded-2xl hover:border-white/20 transition-all;
+  }
+}
+
+@layer utilities {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Bottom sheet animations */
+@keyframes bottomSheetUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-bottom-sheet-up {
+  animation: bottomSheetUp 0.25s ease-out;
+}
+
+.animate-backdrop-fade-in {
+  animation: backdropFadeIn 0.2s ease-out;
+}
