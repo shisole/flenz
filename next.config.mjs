@@ -8,7 +8,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
   },
   images: {
     deviceSizes: [640, 828, 1200, 1440, 1920],
